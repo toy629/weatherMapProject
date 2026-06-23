@@ -65,8 +65,21 @@ main{max-width:1680px;margin:auto;padding:0 28px 60px}
 .pie-mask{background:conic-gradient(var(--gray3) 0 2.5%, var(--gray2) 2.5% 5%, var(--second) 5% 22.5%, var(--first) 22.5% 95%, var(--gray1) 95% 97.5%, var(--gray4) 97.5% 100%)}
 .pie-frame{background:conic-gradient(var(--gray1) 0 10%, var(--second) 10% 30%, var(--first) 30% 95%, var(--gray3) 95% 97.5%, var(--gray2) 97.5% 100%)}
 .label-40{left:48%;top:12%}.label-25{left:18%;top:54%}.label-225{left:25%;top:75%}.label-725{left:29%;top:35%}.label-175{left:55%;top:20%}.label-65{left:38%;top:27%}.label-20{left:50%;top:66%}.label-10{left:65%;top:53%}
+
+.final-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px}
+.final-card{border:1px solid #d5e3eb;border-radius:18px;background:linear-gradient(135deg,#fff 0%,#f7fbfe 100%);box-shadow:0 10px 24px rgba(16,54,74,.08);overflow:hidden}
+.final-card img{width:100%;height:auto;display:block;background:#fff;border-bottom:1px solid #e1ebf1;cursor:zoom-in}
+.final-caption{padding:14px 16px}
+.final-caption h3{margin:0 0 6px;font-size:20px;color:#10334a;line-height:1.35}
+.final-caption p{margin:0;color:#60798b;font-size:14px;line-height:1.55}
+.final-note{margin-top:16px;padding:14px 18px;border-left:5px solid var(--accent);border-radius:14px;background:#f7fbfe;color:#3e6074;line-height:1.7}
+
+.lightbox{display:none;position:fixed;inset:0;z-index:100;background:rgba(6,25,39,.88);padding:28px;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox img{max-width:96vw;max-height:92vh;border-radius:12px;background:#fff;box-shadow:0 24px 80px rgba(0,0,0,.4)}
+.lightbox button{position:fixed;right:26px;top:22px;border:0;border-radius:999px;background:#fff;color:#0b4770;font-size:28px;width:48px;height:48px;cursor:pointer}
 @media(max-width:1120px){.chart-row{grid-template-columns:1fr;gap:24px}.result-panel{max-width:none}.pie{width:320px;height:320px}}
-@media(max-width:720px){.poll-summary{grid-template-columns:1fr}.top-results-row{grid-template-columns:1fr}.minor-list{grid-template-columns:1fr}.top-img{height:190px}.nav{align-items:flex-start;flex-direction:column}main,.poll-intro,.nav,.footer{padding-left:16px;padding-right:16px}.poll-intro h1{font-size:32px!important}}
+@media(max-width:720px){.final-grid{grid-template-columns:1fr}.poll-summary{grid-template-columns:1fr}.top-results-row{grid-template-columns:1fr}.minor-list{grid-template-columns:1fr}.top-img{height:190px}.nav{align-items:flex-start;flex-direction:column}main,.poll-intro,.nav,.footer{padding-left:16px;padding-right:16px}.poll-intro h1{font-size:32px!important}}
 @media print{.header{display:none!important}body{background:#fff}.poll-intro,.poll-card{box-shadow:none;break-inside:avoid}.chart-row{grid-template-columns:300px 1fr}.pie{width:300px;height:300px}.top-img{height:120px}}
 </style>
 </head>
@@ -120,23 +133,40 @@ main{max-width:1680px;margin:auto;padding:0 28px 60px}
     </div>
   </article>
   <article class="poll-card">
-    <h2>高低壓符號外圍加底色及框線建議</h2>
-    <p class="meta">65% 建議維持現狀不加框，20% 無意見，10% 建議保留。</p>
-    <div class="chart-row">
-      <div class="pie pie-frame"><span class="pie-label label-65">65%</span><span class="pie-label label-10">20%</span></div>
-      <div class="result-panel">
-        <div class="top-results-row">
-          <div class="top-card top1"><div class="top-head"><span class="rank-badge">第 1 名</span><span class="top-pct">65%</span></div><div class="top-title">建議維持現狀</div><div class="top-note">不加框</div><img class="top-img" src="assets/vote/frame-top1-current.png" alt="第一名：建議維持現狀"></div>
-          <div class="top-card top2"><div class="top-head"><span class="rank-badge">第 2 名</span><span class="top-pct">20%</span></div><div class="top-title">無意見，都可以</div><div class="top-note">此選項未指定特定視覺方案</div></div>
-        </div>
-        <div class="minor-list">
-          <div class="minor-item"><span class="swatch c-other1"></span><span class="minor-name">建議保留</span><span class="minor-pct">10%</span></div>
-          <div class="minor-item"><span class="swatch c-other3"></span><span class="minor-name">建議加陰影</span><span class="minor-pct">2.5%</span><div class="minor-note">不同底色可有不同陰影，台灣輪廓不明顯</div></div>
-          <div class="minor-item"><span class="swatch c-other2"></span><span class="minor-name">囚錮鋒用紫色</span><span class="minor-pct">2.5%</span></div>
-        </div>
+    <h2>最終建議方案</h2>
+    <p class="meta">將原本「高低壓符號外圍加底色及框線建議」區塊改為最終建議的 4 張圖，集中呈現可作為後續版面決策的視覺方向。</p>
+    <div class="final-grid">
+      <div class="final-card">
+        <img src="assets/vote/final-01-current-product.png" alt="最終建議 1：現有產品參考" loading="lazy" onclick="openLightbox(this.src,this.alt)">
+        <div class="final-caption"><h3>衛星底圖+青藏遮蔽</h3></div>
+      </div>
+      <div class="final-card">
+        <img src="assets/vote/final-04-satellite-reference.png" alt="最終建議 4：衛星底圖參考" loading="lazy" onclick="openLightbox(this.src,this.alt)">
+        <div class="final-caption"><h3>衛星底圖+圖例</h3></div>
+      </div>
+      <div class="final-card">
+        <img src="assets/vote/final-03-blue-gray-cloud-clean.png" alt="最終建議 3：藍灰底圖加雲圖精簡版" loading="lazy" onclick="openLightbox(this.src,this.alt)">
+        <div class="final-caption"><h3>藍灰底圖+青藏遮蔽</h3></div>
+      </div>
+      <div class="final-card">
+        <img src="assets/vote/final-02-blue-gray-cloud-legend.png" alt="最終建議 2：藍灰底圖加雲圖與圖例" loading="lazy" onclick="openLightbox(this.src,this.alt)">
+        <div class="final-caption"><h3>藍灰底圖＋圖例</h3></div>
       </div>
     </div>
   </article>
 </section>
 </main>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()"><button aria-label="關閉">×</button><img id="lightboxImg" alt=""></div>
+<script>
+function openLightbox(src, alt){
+  const lb=document.getElementById('lightbox');
+  const img=document.getElementById('lightboxImg');
+  img.src=src;
+  img.alt=alt||'';
+  lb.classList.add('open');
+}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeLightbox();});
+</script>
 </body></html>
